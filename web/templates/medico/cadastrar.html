@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<h1>cadastrar</h1>
+<form class="form-floating">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu nome">
+        <label for="floatingInput">Nome</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="Digite seu email">
+        <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Digite sua senha">
+        <label for="floatingPassword">Senha</label>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary mb-3">Salvar</button>
+    </div>
+</form>
+{% endblock %}

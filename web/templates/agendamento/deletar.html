@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<h1>Deletar</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>Você tem certeza que deseja excluir o agendamento do paciente "{{ object.paciente.nome }}"?</p>
+    {{ form }}
+    <input type="submit" value="Confirmar">
+</form>
+{% endblock %}

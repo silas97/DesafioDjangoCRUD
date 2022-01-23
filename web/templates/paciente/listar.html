@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Listar Pacientes{% endblock title %}
+
+{% block content %}
+<div>
+    <h4>Lista de Paciêntes</h4>
+    <div>
+        <a href="/paciente/cadastrar" class="btn btn-primary">Cadastrar</a>
+    </div>
+    <div id="table"></div>
+    <!-- Grid.JS CSS -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <!-- Grid.JS JavaScript-->
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+        let teste = new gridjs.Grid({
+            columns: [
+                "Id",
+                "nome",
+                "telefone",
+                "endereco",
+                "numero",
+                "cidade",
+                "uf",
+                "pais",
+                "cep",
+                "Alterar",
+                "Apagar"
+            ],
+            search: true,
+            sort: true,
+            pagination: {
+                limit: 5
+            },
+            language: {
+                'search': {
+                    'placeholder': 'Pesquisar'
+                },
+                'pagination': {
+                    'previous': 'Anterior',
+                    'next': 'Próximo',
+                    'showing': 'Exibindo',
+                    'to': '-',
+                    'of': 'de',
+                    'results': () => 'resultados'
+                }
+            },
+            data: [
+                    {% for paciente in object_list %}
+                        [
+                            "{{ paciente.id }}",
+                            "{{ paciente.nome }}",
+                            "{{ paciente.telefone }}",
+                            "{{ paciente.endereco }}",
+                            "{{ paciente.numero }}",
+                            "{{ paciente.cidade }}",
+                            "{{ paciente.uf }}",
+                            "{{ paciente.pais }}",
+                            "{{ paciente.cep }}",
+                            gridjs.html(`<a href="/paciente/alterar/{{ paciente.id }}" class="btn btn-success">Alterar</a>`),
+                            gridjs.html(`<a href="/paciente/apagar/{{ paciente.id }}" class="btn btn-danger">Apagar</a>`)
+                        ],
+                    {% endfor %}
+            ],
+            className: {
+                table: 'table table-hover table-borderless',
+            }
+            }).render(document.getElementById("table"));
+    </script>
+</div>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Listar Pacientes{% endblock title %}
+
+{% block content %}
+<div>
+    <h4>Lista de Agendamentos</h4>
+    <div>
+        <a href="/agendamento/cadastrar" class="btn btn-primary">Cadastrar</a>
+    </div>
+    <div id="table"></div>
+    <!-- Grid.JS CSS -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <!-- Grid.JS JavaScript-->
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+        new gridjs.Grid({
+            columns: [
+                "Id",
+                "Data",
+                "Descrição",
+                "Status",
+                "Pais",
+                "Medico",
+                "Paciente",
+                "Alterar",
+                "Apagar"
+            ],
+            search: true,
+            sort: true,
+            pagination: {
+                limit: 5
+            },
+            language: {
+                'search': {
+                    'placeholder': 'Pesquisar'
+                },
+                'pagination': {
+                    'previous': 'Anterior',
+                    'next': 'Próximo',
+                    'showing': 'Exibindo',
+                    'to': '-',
+                    'of': 'de',
+                    'results': () => 'resultados'
+                }
+            },
+            data: [
+                    {% for agendamento in object_list %}
+                        [
+                            "{{ agendamento.id }}",
+                            "{{ agendamento.data }}",
+                            "{{ agendamento.descricao }}",
+                            "{{ agendamento.status }}",
+                            "{{ agendamento.pais }}",
+                            "{{ agendamento.medico }}",
+                            "{{ agendamento.paciente.nome }}",
+                            gridjs.html(`<a href="/agendamento/alterar/{{ agendamento.id }}" class="btn btn-success">Alterar</a>`),
+                            gridjs.html(`<a href="/agendamento/apagar/{{ agendamento.id }}" class="btn btn-danger">Apagar</a>`)
+                        ],
+                    {% endfor %}
+            ],
+            className: {
+                table: 'table table-hover table-borderless',
+            }
+            }).render(document.getElementById("table"));
+    </script>
+</div>
+{% endblock content %}
