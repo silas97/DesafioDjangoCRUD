@@ -11,7 +11,7 @@ STATUS_CHOICES = [
 
 
 class Agendamento(models.Model):
-    data = models.DateField()
+    data = models.DateTimeField()
     descricao = models.TextField()
     status = models.CharField(max_length=12, choices=STATUS_CHOICES)
     pais = models.CharField(max_length=20)

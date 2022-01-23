@@ -39,22 +39,27 @@ python -m venv env
 env\Scripts\activate
 ```
 
-3. Instalar dependências:
+3. Atualizar pip:
+```bash
+python -m pip install --upgrade pip
+```
+
+4. Instalar dependências:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Sincronizar database:
+5. Sincronizar database:
 ```bash
 python web\manage.py migrate
 ```
 
-5. Criar um super usuário:
+6. Criar um super usuário:
 ```bash
 python web\manage.py createsuperuser
 ```
 
-6. Iniciar o servidor:
+7. Iniciar o servidor:
 ```bash
 python web\manage.py runserver
 ```
